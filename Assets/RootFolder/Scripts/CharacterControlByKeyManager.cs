@@ -8,15 +8,13 @@ namespace Diamond.CharacterControlLib
     {
         [SerializeField]
         private ICharacterController CharacterController;
-        [SerializeField]
-        private GameObject CharacetrControllerGameObject;
 
         [SerializeField]
         private float _mouseSensitivity = 10.0f;
 
         private void Start()
         {
-            CharacterController = CharacetrControllerGameObject.GetComponent<ICharacterController>();
+
         }
 
         // Update is called once per frame
@@ -27,8 +25,6 @@ namespace Diamond.CharacterControlLib
 
         public void ControlByKeyboard()
         {
-            CharacterController.ExecuteGravity();
-
             if (Input.GetKeyDown(KeyCode.Space))
                 CharacterController.Jump();
 
