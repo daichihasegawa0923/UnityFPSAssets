@@ -24,8 +24,11 @@ namespace Diamond.CharacterControlLib
         protected Joystick _joystick;
 
         /// <summary>
-        /// 視点変更のためのDrag用のイベントトリガー
+        /// 視点変更のためのDrag用のイベントトリガー (Option)
         /// </summary>
+        /// <remarks>
+        /// 必要ない場合は、インスペクタ上からアタッチしないようにする
+        /// </remarks>
         [SerializeField]
         protected EventTrigger _eventTriggerDragChangePerspective;
 
@@ -45,6 +48,9 @@ namespace Diamond.CharacterControlLib
 
         protected virtual void AttachDragEvent()
         {
+            if (!_eventTriggerDragChangePerspective)
+                return;
+
             var entry = new EventTrigger.Entry();
             entry.eventID = EventTriggerType.Drag;
             entry.callback.AddListener(d => DragForChangePerspective((PointerEventData)d));
