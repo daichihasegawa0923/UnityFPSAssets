@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c42187fb85884bde883a9bdf619815e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacetrControllerGameObject: {fileID: 1674243494}
+  CharacterController: {fileID: 1674243495}
   _mouseSensitivity: 10
 --- !u!4 &1148085004
 Transform:

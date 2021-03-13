@@ -8,7 +8,7 @@ namespace Diamond.CharacterControlLib
     /// Character Controlled by keyboard.
     /// </summary>
     [RequireComponent(typeof(CharacterController))]
-    public class CharacterControlStandard : MonoBehaviour,ICharacterController
+    public class CharacterControlStandard : ICharacterController
     {
         public CharacterController CharacterController { private set; get; }
 
@@ -35,7 +35,7 @@ namespace Diamond.CharacterControlLib
         [SerializeField]
         private GameObject _neck;
 
-        public void ExecuteGravity()
+        public override void ExecuteGravity()
         {
             if(this.IsFoot())
             {
@@ -49,7 +49,7 @@ namespace Diamond.CharacterControlLib
             this.CharacterController.Move(gravityVec);
         }
 
-        public void ChangePerspective(Vector3 perspective)
+        public override void ChangePerspective(Vector3 perspective)
         {
             var spin = _neck.transform.localEulerAngles;
             var spinHontai = transform.localEulerAngles;
@@ -69,12 +69,12 @@ namespace Diamond.CharacterControlLib
             transform.localEulerAngles = spinHontai;
         }
 
-        public bool IsFoot()
+        public override bool IsFoot()
         {
             return Physics.BoxCast(transform.position, Vector3.one * _isFootSize, -transform.up, Quaternion.identity, _isFootDistance);
         }
 
-        public void Jump()
+        public override void Jump()
         {
             if (!this.IsFoot())
                 return;
@@ -83,7 +83,7 @@ namespace Diamond.CharacterControlLib
             StartCoroutine(JumpCoroutine());
         }
 
-        public void Move(Vector3 direction)
+        public override void Move(Vector3 direction)
         {
             var x = direction.x;
             var z = direction.z;
@@ -101,7 +101,7 @@ namespace Diamond.CharacterControlLib
         // Update is called once per frame
         void Update()
         {
-
+            this.ExecuteGravity();
         }
 
         protected IEnumerator JumpCoroutine()
